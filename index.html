@@ -19,6 +19,11 @@
         body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background-color: #F8FAFC; }
         /* מניעת גלילה מיותרת כשהמודל פתוח */
         body.modal-open { overflow: hidden; }
+        /* עיצוב גלילה עדינה לחלונות הקופצים */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body>
@@ -34,27 +39,26 @@
             </svg>
         );
 
-        // --- הגדרת אייקונים באופן מקומי במקום lucide-react ---
+        // --- אייקונים ---
         const Presentation = ({className}) => <Icon className={className}><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></Icon>;
         const Eye = ({className}) => <Icon className={className}><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></Icon>;
         const Settings = ({className}) => <Icon className={className}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z"/></Icon>;
         const Share2 = ({className}) => <Icon className={className}><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></Icon>;
         const AlertTriangle = ({className}) => <Icon className={className}><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></Icon>;
-        const FileCode = ({className}) => <Icon className={className}><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m10 13-2 2 2 2"/><path d="m14 17 2-2-2-2"/></Icon>;
         const FileText = ({className}) => <Icon className={className}><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></Icon>;
         const Upload = ({className}) => <Icon className={className}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></Icon>;
-        const Download = ({className}) => <Icon className={className}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></Icon>;
         const Plus = ({className}) => <Icon className={className}><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></Icon>;
         const Trash2 = ({className}) => <Icon className={className}><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></Icon>;
         const Info = ({className}) => <Icon className={className}><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></Icon>;
-        const Copy = ({className}) => <Icon className={className}><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></Icon>;
-        const Check = ({className}) => <Icon className={className}><polyline points="20 6 9 17 4 12"/></Icon>;
         const RefreshCcw = ({className}) => <Icon className={className}><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></Icon>;
         const Maximize2 = ({className, size}) => <Icon className={className} size={size}><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></Icon>;
         const Save = ({className}) => <Icon className={className}><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v13a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></Icon>;
         const FolderOpen = ({className}) => <Icon className={className}><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></Icon>;
         const Sparkles = ({className}) => <Icon className={className}><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3l1.9 5.8 1.9-5.8a2 2 0 0 1 1.3-1.3l5.8-1.9-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z"/></Icon>;
         const Monitor = ({className}) => <Icon className={className}><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></Icon>;
+        const LinkIcon = ({className}) => <Icon className={className}><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></Icon>;
+        const ImageIcon = ({className}) => <Icon className={className}><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></Icon>;
+        const X = ({className}) => <Icon className={className}><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></Icon>;
 
         // --- פלטת צבעים ---
         const colorPresets = [
@@ -87,7 +91,7 @@
             const [isDragging, setIsDragging] = useState(false);
             const [showExportModal, setShowExportModal] = useState(false);
             const [showResetConfirm, setShowResetConfirm] = useState(false);
-            const [copied, setCopied] = useState(false);
+            const [viewModalData, setViewModalData] = useState(null); // חלון קופץ בתצוגת תלמיד
             const containerRef = useRef(null);
 
             useEffect(() => {
@@ -106,8 +110,10 @@
                     try {
                         localStorage.setItem('learning-path-config', JSON.stringify({ image, hotspots }));
                     } catch (e) {
-                        if (e.name === 'QuotaExceededError') {
+                        try {
                             localStorage.setItem('learning-path-config', JSON.stringify({ hotspots }));
+                        } catch (e2) {
+                            console.warn('Could not save to localStorage due to size limits');
                         }
                     }
                 }
@@ -120,6 +126,7 @@
                     reader.onload = (event) => setImage(event.target.result);
                     reader.readAsDataURL(file);
                 }
+                e.target.value = ''; // ניקוי השדה כדי לאפשר העלאה חוזרת של אותו קובץ
             };
 
             const addHotspot = () => {
@@ -129,12 +136,14 @@
                     x: 50, 
                     y: 50, 
                     label: (hotspots.length + 1).toString(), 
+                    actionType: 'link', // 'link', 'embed', 'text'
                     url: '', 
+                    content: '', // לקוד הטמעה או טקסט
                     title: 'משימה חדשה', 
                     color: '#fbbf24',
                     contrast: 'white',
-                    size: 'small', // ברירת מחדל גודל קטן
-                    showTitle: true // הגדרה חדשה: להראות את הכיתוב מתחת
+                    size: 'small',
+                    showTitle: true
                 }]);
                 setActiveHotspot(newId);
             };
@@ -152,6 +161,17 @@
                 if (!url) return "";
                 const cleanUrl = url.trim();
                 return (cleanUrl.startsWith('http://') || cleanUrl.startsWith('https://')) ? cleanUrl : `https://${cleanUrl}`;
+            };
+
+            const handleHotspotClick = (h) => {
+                if (mode === 'view') {
+                    const type = h.actionType || 'link';
+                    if (type === 'link') {
+                        if (h.url) window.open(formatUrl(h.url), '_blank');
+                    } else if (type === 'embed' || type === 'text' || type === 'image') {
+                        setViewModalData(h);
+                    }
+                }
             };
 
             const onDragStart = (id) => {
@@ -205,39 +225,48 @@
                     }
                 };
                 reader.readAsText(file);
-                e.target.value = ''; // איפוס הקלט כדי לאפשר טעינה חוזרת
-            };
-
-            const copyToClipboard = (text) => {
-                const textArea = document.createElement("textarea");
-                textArea.value = text;
-                textArea.style.position = "fixed";
-                textArea.style.left = "-9999px";
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                setCopied(true);
-                setTimeout(() => setCopied(false), 2000);
+                e.target.value = ''; // איפוס
             };
 
             const getStandaloneHTML = () => {
+                let templatesHTML = '';
+                
                 const hotspotsHTML = hotspots.map(h => {
                     const sizeData = sizePresets.find(s => s.id === (h.size || 'small'));
                     const showTitleHTML = h.showTitle !== false 
                         ? `<div class="hotspot-title">${h.title}</div>` 
                         : `<div class="tooltip">${h.title}</div>`;
                     
-                    return `
-                    <a href="${formatUrl(h.url)}" target="_blank" rel="noopener noreferrer" class="hotspot" style="left: ${h.x}%; top: ${h.y}%; width: ${sizeData.dimension}px; height: ${sizeData.dimension}px;">
-                        <svg width="${sizeData.dimension}" height="${sizeData.dimension}" viewBox="0 0 ${sizeData.dimension} ${sizeData.dimension}">
-                        <circle cx="${sizeData.dimension/2}" cy="${sizeData.dimension/2}" r="${sizeData.radius}" fill="${h.color}" stroke="white" stroke-width="4" />
-                        <text x="${sizeData.dimension/2}" y="${sizeData.dimension/2 + 1}" text-anchor="middle" dominant-baseline="central" fill="${h.contrast || 'white'}" font-weight="bold" font-family="Arial" font-size="${sizeData.fontSize}px">${h.label}</text>
-                        </svg>
-                        ${showTitleHTML}
-                    </a>
-                    `;
+                    const actionType = h.actionType || 'link';
+                    
+                    if (actionType === 'link') {
+                        return `
+                        <a href="${formatUrl(h.url)}" target="_blank" rel="noopener noreferrer" class="hotspot" style="left: ${h.x}%; top: ${h.y}%; width: ${sizeData.dimension}px; height: ${sizeData.dimension}px;">
+                            <svg width="${sizeData.dimension}" height="${sizeData.dimension}" viewBox="0 0 ${sizeData.dimension} ${sizeData.dimension}">
+                            <circle cx="${sizeData.dimension/2}" cy="${sizeData.dimension/2}" r="${sizeData.radius}" fill="${h.color}" stroke="white" stroke-width="4" />
+                            <text x="${sizeData.dimension/2}" y="${sizeData.dimension/2 + 1}" text-anchor="middle" dominant-baseline="central" fill="${h.contrast || 'white'}" font-weight="bold" font-family="Arial" font-size="${sizeData.fontSize}px">${h.label}</text>
+                            </svg>
+                            ${showTitleHTML}
+                        </a>
+                        `;
+                    } else {
+                        const templateId = `content-${h.id}`;
+                        // יצירת תבנית מוסתרת לתוכן כדי להזריק אותו לחלון הקופץ בעת לחיצה
+                        if (actionType === 'image') {
+                            templatesHTML += `<template id="${templateId}"><div style="display:flex; justify-content:center; width:100%;"><img src="${h.content || ''}" alt="תמונה" style="max-width:100%; max-height:60vh; border-radius:12px; box-shadow:0 4px 6px rgba(0,0,0,0.1); object-fit:contain;"></div></template>`;
+                        } else {
+                            templatesHTML += `<template id="${templateId}">${h.content || ''}</template>`;
+                        }
+                        return `
+                        <div class="hotspot" onclick="openModal('${h.title.replace(/'/g, "\\'")}', '${templateId}', '${actionType}')" style="left: ${h.x}%; top: ${h.y}%; width: ${sizeData.dimension}px; height: ${sizeData.dimension}px;">
+                            <svg width="${sizeData.dimension}" height="${sizeData.dimension}" viewBox="0 0 ${sizeData.dimension} ${sizeData.dimension}">
+                            <circle cx="${sizeData.dimension/2}" cy="${sizeData.dimension/2}" r="${sizeData.radius}" fill="${h.color}" stroke="white" stroke-width="4" />
+                            <text x="${sizeData.dimension/2}" y="${sizeData.dimension/2 + 1}" text-anchor="middle" dominant-baseline="central" fill="${h.contrast || 'white'}" font-weight="bold" font-family="Arial" font-size="${sizeData.fontSize}px">${h.label}</text>
+                            </svg>
+                            ${showTitleHTML}
+                        </div>
+                        `;
+                    }
                 }).join('');
 
                 return `<!DOCTYPE html>
@@ -255,8 +284,24 @@
         .tooltip { position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.8); color: white; padding: 6px 12px; border-radius: 6px; font-size: 14px; font-weight: bold; white-space: nowrap; opacity: 0; pointer-events: none; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .hotspot:hover .tooltip { opacity: 1; }
         .hotspot-title { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 6px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(4px); padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: bold; color: #555; white-space: nowrap; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); pointer-events: none; z-index: 10; }
+        
+        /* עיצוב המודל (חלון קופץ) */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 999; opacity: 0; pointer-events: none; transition: all 0.3s ease; padding: 20px; box-sizing: border-box; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background: white; border-radius: 20px; width: 100%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; transform: translateY(20px) scale(0.95); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+        .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid #f1f5f9; background: #f8fafc; }
+        .modal-title { font-size: 20px; font-weight: 800; color: #1e293b; margin: 0; background: linear-gradient(to right, #4c1d95, #c026d3); -webkit-background-clip: text; color: transparent; }
+        .close-btn { background: #f1f5f9; border: none; cursor: pointer; color: #64748b; padding: 6px; transition: 0.2s; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .close-btn:hover { color: #e11d48; background: #ffe4e6; }
+        .modal-body { padding: 24px; overflow-y: auto; color: #334155; line-height: 1.6; display: flex; justify-content: center; align-items: flex-start; }
+        .modal-body.type-text { white-space: pre-wrap; font-size: 16px; justify-content: flex-start; }
+        .modal-body iframe { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); width: 100%; height: 60vh; min-height: 300px; border: none; }
+        
         @media (max-width: 768px) {
             .tooltip, .hotspot-title { font-size: 12px; padding: 4px 8px; }
+            .modal-content { max-height: 95vh; }
+            .modal-body iframe { height: 50vh; }
         }
     </style>
 </head>
@@ -265,6 +310,48 @@
         <img src="${image || ''}" alt="מסלול למידה">
         ${hotspotsHTML}
     </div>
+    ${templatesHTML}
+
+    <!-- מבנה החלון הקופץ -->
+    <div class="modal-overlay" id="interactive-modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">כותרת</h3>
+                <button class="close-btn" onclick="closeModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body custom-scrollbar" id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(title, templateId, type) {
+            document.getElementById('modal-title').innerText = title;
+            const template = document.getElementById(templateId);
+            const body = document.getElementById('modal-body');
+            
+            body.innerHTML = ''; // ניקוי תוכן קודם
+            body.className = 'modal-body custom-scrollbar'; // איפוס מחלקות
+            
+            if (type === 'embed' || type === 'image') {
+                body.innerHTML = template.innerHTML;
+            } else if (type === 'text') {
+                body.classList.add('type-text');
+                body.textContent = template.innerHTML;
+            }
+            
+            document.getElementById('interactive-modal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // עצירת גלילת רקע
+        }
+
+        function closeModal() {
+            document.getElementById('interactive-modal').classList.remove('active');
+            document.body.style.overflow = '';
+            // ניקוי התוכן כדי לעצור סרטונים מתנגנים
+            setTimeout(() => { document.getElementById('modal-body').innerHTML = ''; }, 300);
+        }
+    <\/script>
 </body>
 </html>`;
             };
@@ -397,10 +484,10 @@
                                             בחירת קובץ תמונה / GIF
                                         </label>
                                         <div className="text-sm text-slate-400 font-bold">או</div>
-                                        <label className="bg-white text-violet-600 w-full max-w-xs text-center py-3.5 rounded-2xl font-bold cursor-pointer hover:bg-violet-50 hover:text-violet-700 transition-all flex items-center justify-center gap-2 shadow-sm border border-violet-100 active:scale-95 font-sans">
+                                        <label htmlFor="projectUpload" className="bg-white text-violet-600 w-full max-w-xs text-center py-3.5 rounded-2xl font-bold cursor-pointer hover:bg-violet-50 hover:text-violet-700 transition-all flex items-center justify-center gap-2 shadow-sm border border-violet-100 active:scale-95 font-sans">
                                             <FolderOpen className="w-5 h-5" /> טעינת פרויקט (.json)
-                                            <input type="file" className="hidden" accept=".json" onChange={importProject} />
                                         </label>
+                                        <input id="projectUpload" type="file" className="hidden" accept=".json" onChange={importProject} />
                                     </div>
 
                                     {/* מסלולית */}
@@ -420,10 +507,10 @@
                         {hotspots.map((h) => (
                             <div 
                             key={h.id} 
-                            className={`absolute transition-transform ${mode === 'edit' ? 'cursor-move' : 'hover:scale-110 active:scale-95'}`} 
+                            className={`absolute transition-transform ${mode === 'edit' ? 'cursor-move' : 'hover:scale-110 active:scale-95 cursor-pointer'}`} 
                             style={{ left: `${h.x}%`, top: `${h.y}%`, transform: 'translate(-50%, -50%)', zIndex: activeHotspot === h.id ? 30 : 10 }} 
                             onMouseDown={() => onDragStart(h.id)}
-                            onClick={() => mode === 'view' && window.open(formatUrl(h.url), '_blank')}
+                            onClick={() => handleHotspotClick(h)}
                             >
                             <HotspotIcon label={h.label} isActive={activeHotspot === h.id} color={h.color} contrast={h.contrast} sizeKey={h.size} />
                             
@@ -445,7 +532,7 @@
 
                     {/* Sidebar */}
                     {mode === 'edit' && image && (
-                    <div className="w-80 bg-white border-r border-slate-100 shadow-[0_0_40px_rgba(0,0,0,0.05)] p-5 overflow-y-auto flex flex-col gap-5 shrink-0 z-10">
+                    <div className="w-80 bg-white border-r border-slate-100 shadow-[0_0_40px_rgba(0,0,0,0.05)] p-5 overflow-y-auto flex flex-col gap-5 shrink-0 z-10 custom-scrollbar">
                         <div className="flex justify-between items-center mb-1">
                         <h3 className="font-extrabold text-xl bg-clip-text text-transparent bg-gradient-to-r from-violet-700 to-fuchsia-600 font-sans">ניהול נקודות</h3>
                         <button onClick={addHotspot} className="bg-gradient-to-tr from-fuchsia-500 to-violet-500 text-white p-2.5 rounded-full hover:scale-110 transition-transform shadow-lg shadow-fuchsia-500/30 font-sans"><Plus className="w-5 h-5" /></button>
@@ -481,16 +568,72 @@
                                     <button onClick={(e) => { e.stopPropagation(); removeHotspot(h.id); }} className="text-rose-300 hover:text-rose-600 transition-colors font-sans mr-3 shrink-0 bg-rose-50 hover:bg-rose-100 p-1.5 rounded-lg" title="מחק נקודה"><Trash2 className="w-4 h-4" /></button>
                                 </div>
                                 <div className="space-y-4">
-                                    {/* URL Input */}
-                                    <div className="relative">
-                                        <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                                            <Monitor className="w-3.5 h-3.5 text-slate-400" />
-                                        </div>
-                                        <input type="text" value={h.url} onChange={(e) => updateHotspot(h.id, { url: e.target.value })} className="w-full text-xs py-2.5 pl-3 pr-8 border border-slate-200 rounded-xl bg-slate-50/50 text-left text-violet-700 font-sans font-medium focus:outline-none focus:ring-2 focus:ring-fuchsia-200 focus:border-fuchsia-300 transition-all" dir="ltr" placeholder="https://..." onClick={e => e.stopPropagation()} />
+                                    
+                                    {/* בחירת סוג פעולה (טאבים) */}
+                                    <div className="flex bg-slate-200/60 p-1 rounded-xl">
+                                        <button onClick={(e) => { e.stopPropagation(); updateHotspot(h.id, {actionType: 'link'}); }} className={`flex-1 flex items-center justify-center gap-1 py-1.5 rounded-lg text-[10px] font-extrabold transition-all ${(!h.actionType || h.actionType === 'link') ? 'bg-white text-violet-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>
+                                            <LinkIcon className="w-3.5 h-3.5"/> קישור
+                                        </button>
+                                        <button onClick={(e) => { e.stopPropagation(); updateHotspot(h.id, {actionType: 'embed'}); }} className={`flex-1 flex items-center justify-center gap-1 py-1.5 rounded-lg text-[10px] font-extrabold transition-all ${h.actionType === 'embed' ? 'bg-white text-violet-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>
+                                            <Monitor className="w-3.5 h-3.5"/> הטמעה
+                                        </button>
+                                        <button onClick={(e) => { e.stopPropagation(); updateHotspot(h.id, {actionType: 'text'}); }} className={`flex-1 flex items-center justify-center gap-1 py-1.5 rounded-lg text-[10px] font-extrabold transition-all ${h.actionType === 'text' ? 'bg-white text-violet-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>
+                                            <FileText className="w-3.5 h-3.5"/> טקסט
+                                        </button>
+                                        <button onClick={(e) => { e.stopPropagation(); updateHotspot(h.id, {actionType: 'image'}); }} className={`flex-1 flex items-center justify-center gap-1 py-1.5 rounded-lg text-[10px] font-extrabold transition-all ${h.actionType === 'image' ? 'bg-white text-violet-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>
+                                            <ImageIcon className="w-3.5 h-3.5"/> תמונה
+                                        </button>
                                     </div>
+
+                                    {/* שדה הזנה בהתאם לסוג */}
+                                    {(!h.actionType || h.actionType === 'link') && (
+                                        <input type="text" value={h.url} onChange={(e) => updateHotspot(h.id, { url: e.target.value })} className="w-full text-xs py-2.5 px-3 border border-slate-200 rounded-xl bg-slate-50/50 text-left text-violet-700 font-sans font-medium focus:outline-none focus:ring-2 focus:ring-fuchsia-200 focus:border-fuchsia-300 transition-all" dir="ltr" placeholder="https://..." onClick={e => e.stopPropagation()} />
+                                    )}
+                                    {h.actionType === 'embed' && (
+                                        <textarea value={h.content || ''} onChange={(e) => updateHotspot(h.id, { content: e.target.value })} className="w-full text-xs py-2.5 px-3 border border-slate-200 rounded-xl bg-slate-50/50 text-left text-violet-700 font-sans font-mono h-24 resize-none custom-scrollbar focus:outline-none focus:ring-2 focus:ring-fuchsia-200 focus:border-fuchsia-300 transition-all" dir="ltr" placeholder='<iframe src="..."></iframe>' onClick={e => e.stopPropagation()}></textarea>
+                                    )}
+                                    {h.actionType === 'text' && (
+                                        <textarea value={h.content || ''} onChange={(e) => updateHotspot(h.id, { content: e.target.value })} className="w-full text-xs py-2.5 px-3 border border-slate-200 rounded-xl bg-slate-50/50 text-right text-slate-700 font-sans h-24 resize-none custom-scrollbar focus:outline-none focus:ring-2 focus:ring-fuchsia-200 focus:border-fuchsia-300 transition-all" placeholder="הקלידו הסבר, הוראות או תוכן חופשי לתלמיד..." onClick={e => e.stopPropagation()}></textarea>
+                                    )}
+                                    {h.actionType === 'image' && (
+                                        <div className="flex flex-col gap-2.5 p-3 border border-slate-200 rounded-xl bg-slate-50/50" onClick={e => e.stopPropagation()}>
+                                            {h.content && h.content.startsWith('data:image') ? (
+                                                <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 p-2 rounded-lg">
+                                                    <div className="flex items-center gap-2 overflow-hidden">
+                                                        <img src={h.content} alt="preview" className="w-8 h-8 object-cover rounded shadow-sm border border-emerald-200 shrink-0" />
+                                                        <span className="text-xs font-bold text-emerald-700 truncate">תמונה הועלתה בהצלחה</span>
+                                                    </div>
+                                                    <button onClick={() => updateHotspot(h.id, { content: '' })} className="text-emerald-600 hover:text-emerald-800 bg-emerald-100 hover:bg-emerald-200 p-1.5 rounded-md transition-colors shrink-0" title="הסר תמונה">
+                                                        <X className="w-3.5 h-3.5" />
+                                                    </button>
+                                                </div>
+                                            ) : (
+                                                <input type="text" value={h.content || ''} onChange={(e) => updateHotspot(h.id, { content: e.target.value })} className="w-full text-xs py-2 px-3 border border-slate-200 rounded-lg text-left text-violet-700 font-sans focus:outline-none focus:ring-2 focus:ring-fuchsia-200 transition-all" dir="ltr" placeholder="קישור לתמונה (https://...)" />
+                                            )}
+                                            <div className="flex items-center gap-2">
+                                                <div className="h-px bg-slate-200 flex-1"></div>
+                                                <span className="text-[10px] text-slate-400 font-bold">או</span>
+                                                <div className="h-px bg-slate-200 flex-1"></div>
+                                            </div>
+                                            <label htmlFor={`hotspot-img-${h.id}`} className="bg-white text-violet-600 text-xs text-center py-2 rounded-lg font-bold cursor-pointer hover:bg-violet-50 transition-all border border-violet-100 shadow-sm flex items-center justify-center gap-1.5">
+                                                <Upload className="w-3.5 h-3.5" />
+                                                העלאת תמונה מהמחשב
+                                            </label>
+                                            <input id={`hotspot-img-${h.id}`} type="file" className="hidden" accept="image/*" onChange={(e) => {
+                                                const file = e.target.files[0];
+                                                if (file) {
+                                                    const reader = new FileReader();
+                                                    reader.onload = (ev) => updateHotspot(h.id, { content: ev.target.result });
+                                                    reader.readAsDataURL(file);
+                                                }
+                                                e.target.value = ''; // איפוס
+                                            }} />
+                                            {h.content && h.content.startsWith('data:image') && <div className="text-[9.5px] text-rose-500 font-medium text-center mt-0.5 leading-tight">שימו לב: העלאת קובץ תגדיל את משקל<br/>קובץ ה-HTML הסופי.</div>}
+                                        </div>
+                                    )}
                                     
                                     {/* Size Selection */}
-                                    <div className="flex flex-col gap-2">
+                                    <div className="flex flex-col gap-2 pt-1 border-t border-slate-100">
                                         <div className="flex items-center gap-1.5 text-[11px] text-slate-500 font-extrabold font-sans tracking-wide uppercase">
                                             <Maximize2 size={12} /> גודל הנקודה
                                         </div>
@@ -530,10 +673,10 @@
                                 <button onClick={exportProject} className="flex-1 flex items-center justify-center gap-1.5 py-3 text-violet-700 text-xs font-bold bg-violet-50 hover:bg-violet-100 rounded-xl transition-colors font-sans border border-violet-100/50" title="שמור פרויקט למחשב">
                                     <Save className="w-4 h-4" /> שמירת פרויקט
                                 </button>
-                                <label className="flex-1 flex items-center justify-center gap-1.5 py-3 text-cyan-700 text-xs font-bold bg-cyan-50 hover:bg-cyan-100 rounded-xl transition-colors font-sans cursor-pointer border border-cyan-100/50" title="טען פרויקט שמור">
+                                <label htmlFor="sidebarProjectUpload" className="flex-1 flex items-center justify-center gap-1.5 py-3 text-cyan-700 text-xs font-bold bg-cyan-50 hover:bg-cyan-100 rounded-xl transition-colors font-sans cursor-pointer border border-cyan-100/50" title="טען פרויקט שמור">
                                     <FolderOpen className="w-4 h-4" /> טעינת פרויקט
-                                    <input type="file" className="hidden" accept=".json" onChange={importProject} />
                                 </label>
+                                <input id="sidebarProjectUpload" type="file" className="hidden" accept=".json" onChange={importProject} />
                             </div>
                             <button onClick={() => setShowResetConfirm(true)} className="w-full flex items-center justify-center gap-2 py-3 text-rose-600 text-sm font-bold bg-rose-50 hover:bg-rose-100 hover:text-rose-700 border border-rose-100 rounded-xl transition-colors font-sans"><RefreshCcw className="w-4 h-4" /> מסלול חדש / החלפת תמונה</button>
                             <div className="text-[10px] text-slate-400 text-center font-medium font-sans mt-3 tracking-wide uppercase opacity-80">
@@ -543,6 +686,32 @@
                     </div>
                     )}
                 </main>
+
+                {/* --- חלון קופץ לתצוגת תלמיד בתוך האפליקציה --- */}
+                {viewModalData && (
+                    <div className="fixed inset-0 bg-slate-900/75 backdrop-blur-md flex items-center justify-center z-[200] p-4 font-sans transition-all" onClick={() => setViewModalData(null)}>
+                        <div className="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
+                            <div className="flex justify-between items-center p-5 border-b border-slate-100 bg-slate-50/80">
+                                <h3 className="font-extrabold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-violet-800 to-fuchsia-600">{viewModalData.title}</h3>
+                                <button onClick={() => setViewModalData(null)} className="text-slate-400 hover:text-rose-500 bg-white hover:bg-rose-50 p-2 rounded-xl transition-colors shadow-sm border border-slate-100"><X className="w-6 h-6"/></button>
+                            </div>
+                            <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar flex flex-col items-center justify-start min-h-[300px]">
+                                {viewModalData.actionType === 'embed' && (
+                                    <div className="w-full flex justify-center [&>iframe]:w-full [&>iframe]:h-[60vh] [&>iframe]:min-h-[300px] [&>iframe]:rounded-2xl [&>iframe]:shadow-md [&>iframe]:border-none" dangerouslySetInnerHTML={{__html: viewModalData.content}} />
+                                )}
+                                {viewModalData.actionType === 'text' && (
+                                    <div className="w-full text-slate-700 whitespace-pre-wrap leading-relaxed text-lg">{viewModalData.content}</div>
+                                )}
+                                {viewModalData.actionType === 'image' && (
+                                    <div className="w-full flex justify-center">
+                                        <img src={viewModalData.content} alt={viewModalData.title} className="max-w-full max-h-[60vh] rounded-2xl shadow-md object-contain" />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 </div>
             );
         };
